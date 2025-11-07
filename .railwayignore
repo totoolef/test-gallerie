@@ -1,0 +1,46 @@
+# Ignorer le frontend pour Railway (on déploie seulement le backend)
+src/
+public/
+node_modules/
+package.json
+package-lock.json
+vite.config.js
+tailwind.config.js
+postcss.config.js
+index.html
+vercel.json
+dist/
+build/
+
+# Ignorer les fichiers de développement
+*.md
+!README.md
+!README_CLOUD.md
+create_icons.py
+deploy-frontend.sh
+
+# Ignorer les venv
+venv/
+venv311/
+
+# Ignorer les données locales
+data/
+media_storage/
+*.db
+*.sqlite
+*.sqlite3
+index.faiss
+metadata.json
+
+# Ignorer les fichiers temporaires
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
