@@ -1,2 +1,2 @@
-web: python3 api_server_cloud.py
+web: python api_server_cloud.py
 
