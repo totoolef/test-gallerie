@@ -18,10 +18,17 @@ build/
 !README_CLOUD.md
 create_icons.py
 deploy-frontend.sh
+test_app.py
+evaluate_search.py
+app_ios.py
+app_simple.py
 
 # Ignorer les venv
 venv/
 venv311/
+env/
+ENV/
+.venv/
 
 # Ignorer les données locales
 data/
@@ -43,4 +50,17 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+.cache/
+*.cache
+*.log
+
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
 

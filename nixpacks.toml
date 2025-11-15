@@ -2,7 +2,18 @@
 nixPkgs = ["python311", "python311Packages.pip"]
 
 [phases.install]
-cmds = ["pip install --break-system-packages --no-cache-dir -r requirements.txt"]
+cmds = [
+    # Utiliser requirements-cloud.txt qui exclut streamlit et matplotlib
+    "pip install --break-system-packages --no-cache-dir -r requirements-cloud.txt",
+    # Nettoyer les caches pip pour réduire la taille
+    "pip cache purge || true",
+    # Nettoyer les fichiers temporaires Python
+    "find /nix -name '*.pyc' -delete 2>/dev/null || true",
+    "find /nix -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true",
+    # Nettoyer les fichiers de documentation et tests inutiles
+    "find /nix/store -name '*.pyc' -delete 2>/dev/null || true",
+    "find /nix/store -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true"
+]
 
 [phases.build]
 cmds = []
