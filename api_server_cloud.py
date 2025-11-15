@@ -387,16 +387,26 @@ def get_media_file():
 @app.route('/api/health', methods=['GET'])
 def health():
     """Endpoint de santé."""
-    load_index_if_needed()
-    
-    media_count = len(_metadata) if _index_loaded else db.list_media(limit=1)
-    
-    return jsonify({
-        "status": "ok",
-        "index_loaded": _index_loaded,
-        "media_count": len(media_count) if isinstance(media_count, list) else media_count,
-        "storage_type": storage.storage_type
-    }), 200
+    try:
+        load_index_if_needed()
+        
+        if _index_loaded:
+            media_count = len(_metadata)
+        else:
+            media_list = db.list_media(limit=1)
+            media_count = len(media_list) if isinstance(media_list, list) else 0
+        
+        return jsonify({
+            "status": "ok",
+            "index_loaded": _index_loaded,
+            "media_count": media_count,
+            "storage_type": storage.storage_type
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "error": str(e)
+        }), 500
 
 
 if __name__ == '__main__':

@@ -90,7 +90,7 @@ class MediaDatabase:
                     CREATE TABLE IF NOT EXISTS embeddings (
                         id SERIAL PRIMARY KEY,
                         media_id INTEGER REFERENCES media(id),
-                        embedding VECTOR(768),
+                        embedding BYTEA,
                         frame_index INTEGER,
                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                     )
