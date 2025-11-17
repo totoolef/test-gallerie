@@ -8,7 +8,25 @@ import hashlib
 from pathlib import Path
 from typing import Optional
 from PIL import Image
-import streamlit as st
+
+try:
+    import streamlit as st
+except ImportError:
+    st = None
+
+
+def _warn(message: str):
+    if st:
+        st.warning(message)
+    else:
+        print(f"[WARN] {message}")
+
+
+def _error(message: str):
+    if st:
+        st.error(message)
+    else:
+        print(f"[ERROR] {message}")
 
 
 def pick_directory() -> Optional[str]:
@@ -42,7 +60,7 @@ def pick_directory() -> Optional[str]:
                 if directory:
                     return directory
             except subprocess.TimeoutExpired:
-                st.warning("⏱️ Sélection de dossier annulée (timeout)")
+                _warn("⏱️ Sélection de dossier annulée (timeout)")
                 return None
             except subprocess.CalledProcessError:
                 # L'utilisateur a peut-être annulé
@@ -69,12 +87,12 @@ def pick_directory() -> Optional[str]:
         
     except ImportError:
         # tkinter n'est pas disponible
-        st.warning("⚠️ tkinter n'est pas disponible. Utilisez le champ de saisie ci-dessous.")
+        _warn("⚠️ tkinter n'est pas disponible. Utilisez le champ de saisie ci-dessous.")
         return None
     except Exception as e:
-        st.error(f"❌ Erreur lors de la sélection du dossier: {e}")
+        _error(f"❌ Erreur lors de la sélection du dossier: {e}")
         import traceback
-        st.error(f"Détails: {traceback.format_exc()}")
+        _error(f"Détails: {traceback.format_exc()}")
         return None
 
 
