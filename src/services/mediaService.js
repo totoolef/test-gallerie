@@ -75,17 +75,19 @@ export const mediaService = {
    * Génère l'URL de la miniature
    */
   getThumbnailUrl(filePath, isVideo) {
+    const baseUrl = API_BASE_URL.replace('/api', '') || ''
     if (isVideo) {
-      return `/api/thumbnail?path=${encodeURIComponent(filePath)}&type=video`
+      return `${baseUrl}/api/thumbnail?path=${encodeURIComponent(filePath)}&type=video`
     }
-    return `/api/thumbnail?path=${encodeURIComponent(filePath)}&type=image`
+    return `${baseUrl}/api/thumbnail?path=${encodeURIComponent(filePath)}&type=image`
   },
 
   /**
    * Génère l'URL du fichier média (pour lecture vidéo)
    */
   getMediaFileUrl(filePath) {
-    return `/api/media/file?path=${encodeURIComponent(filePath)}`
+    const baseUrl = API_BASE_URL.replace('/api', '') || ''
+    return `${baseUrl}/api/media/file?path=${encodeURIComponent(filePath)}`
   },
 
   /**
