@@ -13,5 +13,5 @@ cmds = [
 cmds = []
 
 [start]
-cmd = "python api_server_cloud.py"
+cmd = "./start_server.sh"
 

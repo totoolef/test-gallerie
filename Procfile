@@ -1,2 +1,2 @@
-web: python api_server_cloud.py
+web: ./start_server.sh
 
